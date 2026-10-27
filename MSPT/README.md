@@ -1,6 +1,6 @@
 # Hướng dẫn chạy thực nghiệm MSPT trên IMRE
 
-Tài liệu này hướng dẫn chạy các notebook `sep5.ipynb`, `sep7.ipynb`, `sep10.ipynb` trên Kaggle, lưu checkpoint và trích kết quả đánh giá tích lũy. Notebook được cung cấp riêng cùng báo cáo; trên máy hiện tại các file nằm trong thư mục Downloads.
+Tài liệu này hướng dẫn chạy các notebook `sep5.ipynb`, `sep7.ipynb`, `sep10.ipynb` trên Kaggle, lưu checkpoint và trích kết quả đánh giá tích lũy. Các notebook nằm cùng thư mục với README này: [sep5.ipynb](sep5.ipynb), [sep7.ipynb](sep7.ipynb), [sep10.ipynb](sep10.ipynb).
 
 Nhóm chỉ đánh giá IMRE vì không tìm thấy dữ liệu IMNER để triển khai thực nghiệm. Ba cấu hình sep5/sep7/sep10 tương ứng 5/7/10 nhiệm vụ trên cùng benchmark.
 
@@ -9,9 +9,14 @@ Nhóm chỉ đánh giá IMRE vì không tìm thấy dữ liệu IMNER để tri�
 1. Tạo notebook Kaggle và import file `sep10.ipynb` để chạy thiết lập 10 nhiệm vụ. Dùng notebook tương ứng nếu chạy sep5 hoặc sep7.
 2. Bật GPU và Internet. Lần chạy đã ghi nhận môi trường có hai Tesla T4; điều này không khẳng định mô hình dùng đồng thời hai GPU.
 3. Thêm các nguồn dữ liệu bằng Add Input:
-   - Dataset chứa repo `ContinueMKGC`, bao gồm `MRE/run.py` và các thư mục chia nhiệm vụ.
-   - Dataset `mspt-imre-official-data`, bao gồm thư mục `data` chứa ảnh và các file ánh xạ.
-   - Dataset checkpoint của đúng cấu hình nếu muốn tiếp tục lượt chạy cũ.
+   - Dataset mã nguồn [ContinueMKGC](https://www.kaggle.com/datasets/nguyenmanhha2502/continuemkgc), bao gồm `MRE/run.py` và các thư mục chia nhiệm vụ.
+   - Dataset [mspt-imre-official-data](https://www.kaggle.com/datasets/nguyenmanhha2502/mspt-imre-official-data), bao gồm thư mục `data` chứa ảnh và các file ánh xạ.
+   - Dataset checkpoint của đúng cấu hình nếu muốn tiếp tục lượt chạy cũ:
+     - [Checkpoint sep5](https://www.kaggle.com/datasets/hlhongm/mspt-imre-checkpoints-sep10-wandb-v1): tên dataset có `sep10`, nhưng notebook sep5 ghi nhận upload vào đây; kiểm tra thư mục `MRE_4_1e-05_sep5` trước khi dùng.
+     - [Checkpoint sep7](https://www.kaggle.com/datasets/hlhongm/mspt-imre-checkpoints-sep7-wandb-rerun-v1).
+     - [Checkpoint sep10](https://www.kaggle.com/datasets/hlhongm/mspt-imre-checkpoints-sep10-task-metrics-v2).
+
+   Dataset riêng tư yêu cầu đăng nhập tài khoản có quyền truy cập. Các liên kết trên được đối chiếu từ log notebook.
 4. Thêm và cấp quyền truy cập các Kaggle Secrets mà notebook yêu cầu:
 
    | Secret | Mục đích |
@@ -206,6 +211,14 @@ Chênh lệch tính từ số đã làm tròn. Tại T10, mức giảm tương �
 | Output có `bert` trống | Kiểm tra dataset checkpoint riêng và lịch sử phiên bản |
 | Muốn lấy A_k nhưng chỉ thấy best F1 | Tìm `current test f1 score` ở lần test cuối từng nhiệm vụ |
 
+## Theo dõi thực nghiệm trên Weights & Biases
+
+- [Project MSPT IMRE reproduction](https://wandb.ai/lhm_ha/mspt-imre-reproduction).
+- [Run sep5](https://wandb.ai/lhm_ha/mspt-imre-reproduction/runs/imre-sep5-v1).
+- [Run sep7](https://wandb.ai/lhm_ha/mspt-imre-reproduction/runs/imre-sep7-v1).
+- [Run sep10](https://wandb.ai/lhm_ha/mspt-imre-reproduction/runs/imre-sep10-task-metrics-v2).
+
+Các liên kết được lấy từ log notebook. Project hoặc run riêng tư yêu cầu tài khoản có quyền truy cập. Khi đọc biểu đồ, phân biệt điểm test cao nhất với điểm cuối nhiệm vụ dùng để báo cáo A_k; epoch có thể bắt đầu lại khi chuyển nhiệm vụ hoặc sang replay.
 ## Tài liệu tham khảo
 
 - [Mã nguồn tác giả](https://github.com/zjunlp/ContinueMKGC)
